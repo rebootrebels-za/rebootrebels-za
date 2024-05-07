@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reboot Rebels</title>
+    <style>
+
+        *, *:before, *:after {
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            --color-primary: #9f38cf;
+            --color-primary-slightShift: #a44bd4;
+            --color-secondary: #0e0e0e;
+            --color-h1: var(--color-primary);
+            --color-screen: #3e3e3e;
+            --color-screen-header: #4d4d4f;
+        }
+
+        body {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary) 100%);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        body, button, input {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+        }
+
+        h1 {
+            font-size: 8em;
+            color: var(--color-h1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .background {
+            display: flex;
+        }
+
+        .container {
+            flex: 0 1 90%;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .screen {
+            position: relative;
+            background: var(--color-screen);
+            border-radius: 15px;
+        }
+
+        .screen:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            bottom: 0;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+            z-index: -1;
+        }
+
+        .screen-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--color-screen-header);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .screen-header-left {
+            margin-right: auto;
+        }
+
+        .screen-header-button {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 3px;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .screen-header-button.close {
+            background: #ed1c6f;
+        }
+
+        .screen-header-button.maximize {
+            background: #e8e925;
+        }
+
+        .screen-header-button.minimize {
+            background: #74c54f;
+        }
+
+        .screen-header-right {
+            display: flex;
+        }
+
+        .screen-header-ellipsis {
+            width: 3px;
+            height: 3px;
+            margin-left: 2px;
+            border-radius: 8px;
+            background: #999;
+        }
+
+        .screen-body {
+            display: flex;
+        }
+
+        .screen-body-item {
+            flex: 1;
+            padding: 50px;
+        }
+
+        .screen-body-item.left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-title {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            color: var(--color-primary);
+            font-size: 48px;
+        }
+
+        .app-title:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 25px;
+            height: 4px;
+            background: var(--color-primary);
+        }
+
+        .app-form-group {
+            margin-bottom: 15px;
+        }
+
+        .app-form-group.message {
+            margin-top: 40px;
+        }
+
+        .app-form-group.buttons {
+            margin-bottom: 0;
+            text-align: right;
+        }
+
+        .app-form-control {
+            width: 100%;
+            padding: 10px 0;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #666;
+            color: #ddd;
+            font-size: 18px;
+            text-transform: uppercase;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        .app-form-control::placeholder {
+            color: #666;
+        }
+
+        .app-form-control:focus {
+            border-bottom-color: #ddd;
+        }
+
+        .app-form-button {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 24px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .app-form-button:hover {
+            color: var(--color-primary-slightShift);
+        }
+
+        .dribbble {
+            width: 20px;
+            height: 20px;
+            margin: 0 5px;
+        }
+
+        @media screen and (max-width: 520px) {
+        .screen-body {
+            flex-direction: column;
+        }
+
+        .screen-body-item.left {
+            margin-bottom: 30px;
+        }
+
+        .app-title {
+            flex-direction: row;
+        }
+
+        .app-title span {
+            margin-right: 12px;
+        }
+
+        .app-title:after {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+        .screen-body {
+            padding: 40px;
+        }
+
+        .screen-body-item {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Reboot Rebels</h1>
+    <div class="background">
+        <div class="container">
+          <div class="screen">
+            <div class="screen-header">
+              <div class="screen-header-left">
+                <div class="screen-header-button close"></div>
+                <div class="screen-header-button maximize"></div>
+                <div class="screen-header-button minimize"></div>
+              </div>
+              <div class="screen-header-right">
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="screen-body-item left">
+                <div class="app-title">
+                  <span>CONTACT</span>
+                  <span>US</span>
+                </div>
+              </div>
+              <div class="screen-body-item">
+                <div class="app-form">
+                  <div class="app-form-group">
+                    <input class="app-form-control" id="name" placeholder="NAME">
+                  </div>
+                  <div class="app-form-group">
+                    <input class="app-form-control" id="email" placeholder="EMAIL">
+                  </div>
+                  <div class="app-form-group">
+                    <input class="app-form-control" id="contactNo" placeholder="CONTACT NO">
+                  </div>
+                  <div class="app-form-group message">
+                    <input class="app-form-control" id="message" placeholder="MESSAGE">
+                  </div>
+                  <div class="g-recaptcha" data-sitekey="6LfpsNQpAAAAABVH-ZEkiBZhBd3wMH8qKE2bXhOT"></div>
+                  <div class="app-form-group buttons">
+                    <button class="app-form-button">SEND</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+                publicKey: "nUCJhgMnmFxdRB0nm",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        document.querySelector('.app-form-button').addEventListener('click', function() {
+            sendEmail();
+        });
+
+        function sendEmail() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var contactNo = document.getElementById('contactNo').value;
+            var message = document.getElementById('message').value;
+            var recaptchaResponse = grecaptcha.getResponse();
+
+            emailjs.send("service_r5a1k6q", "template_76zue6b", {
+                to_name: name,
+                from_name: email,
+                contact_number: contactNo,
+                message: message,
+                "g-recaptcha-response": recaptchaResponse
+            })
+            .then(
+                function(response) {
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('contactNo').value = '';
+                    document.getElementById('message').value = '';
+                    grecaptcha.reset();
+                    console.log("SUCCESS", response);
+                    alert("Email sent successfully.");
+                },
+                function(error) {
+                    console.log("FAILED", error);
+                    alert("Failed to send email. Please try again later.");
+                }
+            );
+        }
+    </script>
+</body>
+</html>
