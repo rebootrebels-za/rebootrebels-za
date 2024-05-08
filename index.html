@@ -292,7 +292,9 @@
     </script>
     <script type="text/javascript">
         document.querySelector('.app-form-button').addEventListener('click', function() {
-            sendEmail();
+            if (validateInput()) {
+                sendEmail();
+            }
         });
 
         function sendEmail() {
@@ -325,6 +327,56 @@
                 }
             );
         }
+    </script>
+    <script type="text/javascript">
+        function validateName(name) {
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                alert('Please enter your name.');
+                return false;
+            }
+
+            return true;
+        };
+
+        function vlaidateEmail(email) {
+            if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateContactNo(contactNo) {
+            if (!/^0[0-9]{9}$/.test(contactNo)) {
+                alert('Please enter a valid contact number.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateMessage(message) {
+            if (message === '') {
+                alert('Please enter a message.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateInput() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var contactNo = document.getElementById('contactNo').value;
+            var message = document.getElementById('message').value;
+
+            if (validateName(name) && vlaidateEmail(email) && validateContactNo(contactNo) && validateMessage(message)) {
+                return true;
+            } else {
+                return false;
+            }
+        };
     </script>
 </body>
 </html>
